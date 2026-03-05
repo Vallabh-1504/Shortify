@@ -5,24 +5,44 @@ const catchAsync = require('../utilities/catchAsync');
 const validate = require('../middlewares/validateInput');
 const Schemas = require('../validators/schemas');
 const requireLogin = require('../middlewares/requireLogin');
+const checkSafeBrowsing = require('../middlewares/safeBrowsing');
 
 // app.get- to input url
-router.get('/', url.renderHome);
+router.get('/', 
+    url.renderHome
+);
 
-router.post('/url', validate(Schemas.newUrlSchema), requireLogin,  catchAsync(url.createUrl));
+router.post('/url', 
+    validate(Schemas.newUrlSchema), 
+    requireLogin,
+    checkSafeBrowsing,
+    catchAsync(url.createUrl)
+);
 
-router.get('/r/:shortId', catchAsync(url.redirectShortUrl));
+router.get('/r/:shortId', 
+    catchAsync(url.redirectShortUrl)
+);
 
-router.get('/urls', requireLogin, catchAsync(url.dashboard));
+router.get('/urls', 
+    requireLogin, 
+    catchAsync(url.dashboard)
+);
 
-router.get('/url/:id', requireLogin, catchAsync(url.renderShowPage));
+router.get('/url/:id', 
+    requireLogin, 
+    catchAsync(url.renderShowPage)
+);
 
-router.get('/url/:id/analytics', requireLogin, catchAsync(url.getAnalytics));
+router.get('/url/:id/analytics', 
+    requireLogin, 
+    catchAsync(url.getAnalytics)
+);
 
 router.post(
     '/url/:id/edit/redirect', 
     requireLogin, 
-    validate(Schemas.updateRedirectSchema), 
+    validate(Schemas.updateRedirectSchema),
+    checkSafeBrowsing,
     catchAsync(url.updateRedirectUrl)
 );
 
