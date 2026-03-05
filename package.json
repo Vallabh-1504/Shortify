@@ -30,8 +30,8 @@
     "google-auth-library": "^10.4.0",
     "ioredis": "^5.8.2",
     "joi": "^17.13.3",
+    "ksort-id": "^1.0.1",
     "mongoose": "^8.15.1",
-    "nanoid": "^3.3.11",
     "nodemailer": "^7.0.11",
     "qrcode": "^1.5.4"
   }

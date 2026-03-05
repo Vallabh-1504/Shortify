@@ -6,6 +6,7 @@ const {redis, SLUG_SET_KEY, redisConfig} = require('../config/redis');
 const UrlModel = require('../models/Url');
 const { SLUG_QUEUE_NAME } = require('../queues/slugQueue');
 const IORedis = require('ioredis');
+const {randomid} = require('ksort-id');
 
 const dbUrl = process.env.MONGO_URL || "mongodb://localhost:27017/URLshortener";
 
@@ -32,7 +33,7 @@ const processor = async (job) =>{
             const newSlugs = new Set();
 
             for(let i = 0; i < slugsToGenerateCount * 2 && generatedCount < slugsToGenerateCount; i++){
-                const shortId = nanoid(8);
+                const shortId = randomid(6);
 
                 // check in DB
                 const existsInDb = await UrlModel.findOne({

@@ -1,11 +1,11 @@
 const UrlModel = require('../models/Url');
-const {nanoid} = require('nanoid');
 const QRCode = require('qrcode');
 const AppError = require('../utilities/AppError');
 const baseUrl = process.env.BASE_URL || 'http://localhost:8000';
 const {redis, SLUG_SET_KEY} = require('../config/redis');
 const lookup = require('country-code-lookup');
 const {visitQueue} = require('../queues/visitQueue');
+const {randomid} = require('ksort-id');
 
 
 const getUrlAndCheckOwner = async (urlId, userId) =>{
@@ -33,7 +33,7 @@ module.exports.createUrl = async (req, res)=> {
         console.warn('Slug set empty or redis down. Genrarting on the fly');
 
         while(true){
-            shortId = nanoid(8);
+            shortId = randomid(6);
             const exists = await UrlModel.findOne({shortId});
             if(!exists) break;
         }
