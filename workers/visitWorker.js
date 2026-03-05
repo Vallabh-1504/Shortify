@@ -7,7 +7,7 @@ const {redisConfig} = require('../config/redis');
 const UrlModel = require('../models/Url');
 const {VISIT_QUEUE_NAME} = require('../queues/visitQueue');
 
-const dbUrl = process.env.MONGO_URL || "mongodb://localhost:27017/URLshortener1";
+const dbUrl = process.env.MONGO_URL || "mongodb://localhost:27017/URLshortener";
 
 mongoose.connect(dbUrl);
 const db = mongoose.connection;

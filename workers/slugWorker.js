@@ -1,6 +1,5 @@
 require('dotenv').config();
 const {Worker} = require('bullmq');
-const {nanoid} = require('nanoid');
 const mongoose = require('mongoose');
 const {redis, SLUG_SET_KEY, redisConfig} = require('../config/redis');
 const UrlModel = require('../models/Url');
